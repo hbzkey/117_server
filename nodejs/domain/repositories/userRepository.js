@@ -92,7 +92,7 @@ function create(user) {
         sex: user.sex,
         birthday: user.birthday,
         phone: user.phone,
-        email: user.email,
+       // email: user.email,
         identity: user.identity,
         shcool_id: user.shcool_id,
         faculty_id: user.faculty_id,

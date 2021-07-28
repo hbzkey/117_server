@@ -1,11 +1,11 @@
 const model = require('../infrastructure/model');
 
 function getAllUsers() {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User = model.user;
-        User.findAndCountAll({  //count  findAll  findOne
-            order: ['id'],  //排序
-            raw:true,  // 查询结果sequelize模型转成数组
+        User.findAndCountAll({ //count  findAll  findOne
+            order: ['id'], //排序
+            raw: true, // 查询结果sequelize模型转成数组
         }).then(function(result) {
             resolve(result);
         }).catch(function(error) {
@@ -14,27 +14,30 @@ function getAllUsers() {
     });
 };
 function getUserById(user_id) {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User = model.user;
-        User.findAll({  //count  findAll  findOne
+        console.log('gogo');
+        User.findAll({ //count  findAll  findOne
             where: {
                 id: user_id
             },
-            order: [],  //排序
-            raw:true,  // 查询结果sequelize模型转成数组
+            order: [], //排序
+            raw: true, // 查询结果sequelize模型转成数组
         }).then(function(result) {
             resolve(result);
+
         }).catch(function(error) {
             console.log(error)
         });
     });
 };
+
 function getAllUserRoles() {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User_role = model.user_role;
-        User_role.findAndCountAll({  //count  findAll  findOne
-            order: ['user_id'],  //排序
-            raw:true,  // 查询结果sequelize模型转成数组
+        User_role.findAndCountAll({ //count  findAll  findOne
+            order: ['user_id'], //排序
+            raw: true, // 查询结果sequelize模型转成数组
         }).then(function(result) {
             resolve(result);
         }).catch(function(error) {
@@ -42,15 +45,16 @@ function getAllUserRoles() {
         });
     });
 };
+
 function getUserRolesByUserId(user_id) {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User_role = model.user_role;
-        User_role.findAndCountAll({  //count  findAll  findOne
+        User_role.findAndCountAll({ //count  findAll  findOne
             where: {
                 user_id: user_id
             },
-            order: ['user_id'],  //排序
-            raw:true,  // 查询结果sequelize模型转成数组
+            order: ['user_id'], //排序
+            raw: true, // 查询结果sequelize模型转成数组
         }).then(function(result) {
             resolve(result);
         }).catch(function(error) {
@@ -61,7 +65,7 @@ function getUserRolesByUserId(user_id) {
 
 
 function insertUser(phone) {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User = model.user;
         User.create({
             phone: phone,
@@ -72,11 +76,12 @@ function insertUser(phone) {
         }).catch(function(error) {
             console.log(error)
         });
-    
+
     });
 };
-function insertUserRole(user_id,role_id,role_name) {
-    return new Promise(function(resolve,reject){
+
+function insertUserRole(user_id, role_id, role_name) {
+    return new Promise(function(resolve, reject) {
         let User_role = model.user_role;
         User_role.create({
             user_id: user_id,
@@ -87,24 +92,24 @@ function insertUserRole(user_id,role_id,role_name) {
         }).catch(function(error) {
             console.log(error)
         });
-    
+
     });
 };
 
 
 //注册后设置用户基本信息 controller user.js
 function updateUser(user) {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User = model.user;
         User.update({
             name: user.name,
             sex: user.sex,
-            birthday: user.birthday,
+            //birthday: user.birthday,
             phone: user.phone,
-           // email: user.email,
+            // email: user.email,
             identity: user.identity,
             student_number: user.student_number,
-           // school_id: user.school_id,
+            // school_id: user.school_id,
             faculty_id: user.faculty_id,
             major_id: user.major_id,
             school_name: user.school_name,
@@ -114,8 +119,8 @@ function updateUser(user) {
             head_image: user.head_image,
             experience: user.experience,
             extend_json: user.extend_json,
-        },{
-            where:{
+        }, {
+            where: {
                 id: user.id
             }
         }).then(function(result) {
@@ -123,16 +128,17 @@ function updateUser(user) {
         }).catch(function(error) {
             console.log(error)
         });
-    
+
     });
 };
-function updateUserExperience(user_id,experience) {
-    return new Promise(function(resolve,reject){
+
+function updateUserExperience(user_id, experience) {
+    return new Promise(function(resolve, reject) {
         let User = model.user;
         User.update({
             experience: experience
-        },{
-            where:{
+        }, {
+            where: {
                 id: user_id
             }
         }).then(function(result) {
@@ -140,17 +146,18 @@ function updateUserExperience(user_id,experience) {
         }).catch(function(error) {
             console.log(error)
         });
-    
+
     });
 };
-function updateUserRole(user_id,role_id,role_name) {
-    return new Promise(function(resolve,reject){
+
+function updateUserRole(user_id, role_id, role_name) {
+    return new Promise(function(resolve, reject) {
         let User = model.user;
         User.update({
             role_id: role_id,
             role_name: role_name
-        },{
-            where:{
+        }, {
+            where: {
                 user_id: user_id,
             }
         }).then(function(result) {
@@ -158,25 +165,26 @@ function updateUserRole(user_id,role_id,role_name) {
         }).catch(function(error) {
             console.log(error)
         });
-    
+
     });
 };
+
 function updateAllUserRole(pairs) {
-    return new Promise(function(resolve,reject){
+    return new Promise(function(resolve, reject) {
         let User_role = model.user_role;
-        User_role.destroy({ 
-            where: {}, 
-            truncate: true 
-        })
-        .then(function(result) {
-            return User_role.bulkCreate(pairs) //user_id  role_id  role_name
-        })
-        .then(function(result) {
-            resolve(result);
-        }).catch(function(error) {
-            console.log(error)
-        });
-    
+        User_role.destroy({
+                where: {},
+                truncate: true
+            })
+            .then(function(result) {
+                return User_role.bulkCreate(pairs) //user_id  role_id  role_name
+            })
+            .then(function(result) {
+                resolve(result);
+            }).catch(function(error) {
+                console.log(error)
+            });
+
     });
 };
 

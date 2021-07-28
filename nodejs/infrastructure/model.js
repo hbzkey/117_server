@@ -1,7 +1,6 @@
-const fs = require('fs');
+﻿const fs = require('fs');
 const Sequelize = require('sequelize');
 const config = require('./config');
-
 var sequelize = new Sequelize(config.database, config.username, config.password, {
     host: config.host,
     dialect: 'mysql',
@@ -32,7 +31,7 @@ let js_files = files.filter((f)=>{
     return f.endsWith('.js');
 }, files);
 
-module.exports = {sequelize};
+module.exports = {};
 
 for (let f of js_files) {
     console.log(`import model from file ${f}...`);
@@ -41,3 +40,26 @@ for (let f of js_files) {
     // module.exports[name].sync({alter: true }); // 若数据库表不存在，则创建
 }
 console.log(`model.js  **************`);
+
+// 使用model：require('./model')  let User = model.user;
+
+
+/*
+// 递归读取目录下的所有文件 model文件
+function readFileList(dir, filesList = []) {
+    const files = fs.readdirSync(dir);
+    console.log(files);
+    files.forEach((item, index) => {
+        var fullPath = path.join(dir, item);
+        const stat = fs.statSync(fullPath);
+        if (stat.isDirectory()) {      
+            readFileList(path.join(dir, item), filesList);  //递归读取文件
+        } else {                
+            filesList.push(fullPath);                     
+        }        
+    });
+    return filesList;
+}
+var filesList = [];
+readFileList(__dirname,filesList);
+*/

@@ -13,6 +13,7 @@ function getAllRoles() {
         });
     });
 };
+
 function getRoleById(id) {
     return new Promise(function(resolve,reject){
         let Role = model.role;
@@ -62,12 +63,12 @@ function getRolePermissionByRoleId(role_id) {
     });
 };
 
-function insertRole(name,creator) {
+function insertRole(name,create_time,creator) {
     return new Promise(function(resolve,reject){
         let Role = model.role;
         Role.create({
             name: name,
-            //create_time: create_time,
+            create_time: create_time,
             creator: creator,
             is_delete: false,
         }).then(function(result) {

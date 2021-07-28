@@ -6,7 +6,6 @@ const cors = require('koa-cors');//允许其它域访问！！！
 // 导入controller middleware:
 const controller = require('./controller');
 
-
 const app = new Koa();
 
 // log request URL以及页面执行时间:
