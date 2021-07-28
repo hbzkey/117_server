@@ -1,4 +1,5 @@
 const model = require('../infrastructure/model');
+
 function getLoginByPhone(phone) {
     return new Promise(function(resolve,reject){
         let Login = model.login;
@@ -15,7 +16,22 @@ function getLoginByPhone(phone) {
         });
     });
 };
-
+// function getLoginByEmail(email) {
+//     return new Promise(function(resolve,reject){
+//         let Login = model.login;
+//         Login.findAll({  //count  findAll  findOne
+//             where: {
+//                 email: email
+//             },
+//             order: [],  //排序
+//             raw:true,  // 查询结果sequelize模型转成数组
+//         }).then(function(result) {
+//             resolve(result);
+//         }).catch(function(error) {
+//             console.log(error)
+//         });
+//     });
+// };
 function getLoginByUserId(user_id) {
     return new Promise(function(resolve,reject){
         let Login = model.login;
@@ -33,15 +49,14 @@ function getLoginByUserId(user_id) {
     });
 };
 
-function insertLogin(user_id,phone,phone_password) {
+function insertLogin(user_id,phone,phone_password,create_time) {
     return new Promise(function(resolve,reject){
         let Login = model.login;
-        
         Login.create({
             user_id: user_id,
             phone: phone,
             phone_password: phone_password,
-           // create_time: create_time
+            create_time: create_time
         }).then(function(result) {
             resolve(result);
         }).catch(function(error) {
@@ -51,7 +66,24 @@ function insertLogin(user_id,phone,phone_password) {
     });
 };
 
-
+// function updateLoginEmail(user_id,email,email_password) {
+//     return new Promise(function(resolve,reject){
+//         let Login = model.login;
+//         Login.update({
+//             email:email,
+//             email_password:email_password
+//         },{
+//             where:{
+//                 user_id: user_id
+//             }
+//         }).then(function(result) {
+//             resolve(result);
+//         }).catch(function(error) {
+//             console.log(error)
+//         });
+    
+//     });
+// };
 function updateLoginPhone(user_id,phone,phone_password) {
     return new Promise(function(resolve,reject){
         let Login = model.login;
@@ -73,9 +105,10 @@ function updateLoginPhone(user_id,phone,phone_password) {
 
 module.exports = {
     'getLoginByPhone': getLoginByPhone,
-   
+   // 'getLoginByEmail': getLoginByEmail,
     'getLoginByUserId': getLoginByUserId,
     'insertLogin': insertLogin,
- 
+   // 'updateLoginEmail': updateLoginEmail,
     'updateLoginPhone': updateLoginPhone
 };
+

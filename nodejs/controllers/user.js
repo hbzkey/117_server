@@ -1,4 +1,4 @@
-const userService = require('../application/userService');
+﻿const userService = require('../application/userService');
 const roleService = require('../application/roleService');
 
 var initializeUser = async (ctx, next) => {
@@ -8,7 +8,6 @@ var initializeUser = async (ctx, next) => {
   let student_number = ctx.request.body.student_number;
 
   state = '';
-
 
 
   await userService.getUserById(user_id)

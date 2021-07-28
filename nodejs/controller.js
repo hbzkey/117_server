@@ -1,7 +1,6 @@
 const fs = require('fs');
 
 //自动扫描controllers目录，找到所有js文件，导入，然后注册每个URL
-
 // 处理每个js文件:
 function addMapping(router, mapping) {
     for (var url in mapping) {

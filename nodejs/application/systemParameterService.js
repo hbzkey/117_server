@@ -14,6 +14,7 @@ function getAllSystemParameter() {
         });
     });
 };
+
 function getUserSystemParameterByUserId(user_id) {
     return new Promise(function(resolve,reject){
         let User_system_parameter = model.user_system_parameter;

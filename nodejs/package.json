@@ -7,14 +7,18 @@
     "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "", 
   "license": "ISC",
   "dependencies": {
+    "@koa/cors": "^2.2.3",
+    "aliyun-api-gateway": "^1.1.6",
     "koa": "^2.13.1",
     "koa-bodyparser": "^4.3.0",
     "koa-cors": "0.0.16",
     "koa-router": "^10.0.0",
     "mysql2": "^2.1.0",
-    "sequelize": "^5.21.6"
+    "qcloudsms_js": "^0.1.1",
+    "sequelize": "^5.21.6",
+    "tencentcloud-sdk-nodejs": "^4.0.104"
   }
 }
